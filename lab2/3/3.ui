@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>notebook</class>
+ <widget class="QMainWindow" name="notebook">
+  <property name="geometry">
+   <rect><x>0</x><y>0</y><width>480</width><height>420</height></rect>
+  </property>
+  <property name="windowTitle">
+   <string>Записная книжка</string>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="labelName">
+    <property name="geometry">
+     <rect><x>20</x><y>20</y><width>100</width><height>25</height></rect>
+    </property>
+    <property name="text"><string>Имя:</string></property>
+   </widget>
+   <widget class="QLineEdit" name="lineEditName">
+    <property name="geometry">
+     <rect><x>120</x><y>20</y><width>340</width><height>25</height></rect>
+    </property>
+    <property name="placeholderText"><string>Введите имя контакта</string></property>
+   </widget>
+   <widget class="QLabel" name="labelPhone">
+    <property name="geometry">
+     <rect><x>20</x><y>60</y><width>100</width><height>25</height></rect>
+    </property>
+    <property name="text"><string>Номер:</string></property>
+   </widget>
+   <widget class="QLineEdit" name="lineEditPhone">
+    <property name="geometry">
+     <rect><x>120</x><y>60</y><width>340</width><height>25</height></rect>
+    </property>
+    <property name="placeholderText"><string>Введите номер телефона</string></property>
+   </widget>
+   <widget class="QPushButton" name="pushButtonAdd">
+    <property name="geometry">
+     <rect><x>120</x><y>100</y><width>340</width><height>30</height></rect>
+    </property>
+    <property name="text"><string>Добавить</string></property>
+   </widget>
+   <widget class="QListWidget" name="listWidget">
+    <property name="geometry">
+     <rect><x>20</x><y>150</y><width>440</width><height>240</height></rect>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect><x>0</x><y>0</y><width>480</width><height>21</height></rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -107,7 +107,6 @@ class Calculator(QMainWindow):
                 elif self.operation == '/':
                     if second_number == 0:
                         self.display.setText("Ошибка: деление на 0")
-                        self.clear()
                         return
                     result = self.first_number / second_number
                 
@@ -121,7 +120,7 @@ class Calculator(QMainWindow):
                 self.waiting_for_second = False
                 
             except ValueError:
-                self.display.setText("Ошибка")
+                self.display.setText("oshibka")
                 self.clear()
 
 def main():
