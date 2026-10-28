@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>920</width>
+    <height>620</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Каталог библиотеки</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="rootLayout">
+    <item>
+     <widget class="QStackedWidget" name="pages">
+      <widget class="QWidget" name="authPage">
+       <layout class="QVBoxLayout" name="authLayout">
+        <item>
+         <widget class="QLabel" name="headingLabel">
+          <property name="text">
+           <string>Каталог библиотеки</string>
+          </property>
+          <property name="alignment">
+           <enum>Qt::AlignCenter</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="usernameLabel">
+          <property name="text">
+           <string>Логин</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="usernameEdit">
+          <property name="placeholderText">
+           <string>Введите логин</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="passwordLabel">
+          <property name="text">
+           <string>Пароль</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="passwordEdit">
+          <property name="placeholderText">
+           <string>Введите пароль</string>
+          </property>
+          <property name="echoMode">
+           <enum>QLineEdit::Password</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="authorizationButtons">
+          <item>
+           <widget class="QPushButton" name="loginButton">
+            <property name="text">
+             <string>Войти</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="registrationButton">
+            <property name="text">
+             <string>Зарегистрироваться</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QLabel" name="authStatus">
+          <property name="text">
+           <string />
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="catalogPage">
+       <layout class="QVBoxLayout" name="catalogLayout">
+        <item>
+         <layout class="QHBoxLayout" name="searchLayout">
+          <item>
+           <widget class="QLabel" name="authorSearchLabel">
+            <property name="text">
+             <string>Автор:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="authorSearch">
+            <property name="placeholderText">
+             <string>Поиск по автору</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="titleSearchLabel">
+            <property name="text">
+             <string>Название:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="titleSearch">
+            <property name="placeholderText">
+             <string>Поиск по названию</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="bookButtons">
+          <item>
+           <widget class="QPushButton" name="addBookButton">
+            <property name="text">
+             <string>Добавить</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="editBookButton">
+            <property name="text">
+             <string>Изменить</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="deleteBookButton">
+            <property name="text">
+             <string>Удалить</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="bookContent">
+          <item>
+           <widget class="QTableWidget" name="booksTable" />
+          </item>
+          <item>
+           <widget class="QGroupBox" name="bookPanel">
+            <property name="title">
+             <string>Информация о книге</string>
+            </property>
+            <layout class="QVBoxLayout" name="detailLayout">
+             <item>
+              <widget class="QLabel" name="bookImage">
+               <property name="minimumSize">
+                <size>
+                 <width>240</width>
+                 <height>260</height>
+                </size>
+               </property>
+               <property name="alignment">
+                <enum>Qt::AlignCenter</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="bookInformation">
+               <property name="text">
+                <string>Выберите книгу</string>
+               </property>
+               <property name="alignment">
+                <enum>Qt::AlignCenter</enum>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources />
+ <connections />
+</ui>
