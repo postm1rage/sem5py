@@ -13,21 +13,32 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         self.people = []
         self.ui.resultsTable.setColumnCount(3)
-        self.ui.resultsTable.setHorizontalHeaderLabels(['Логин', 'ФИО', 'Суммарный балл'])
-        self.ui.resultsTable.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
-        self.ui.resultsTable.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
-        self.ui.resultsTable.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
+        self.ui.resultsTable.setHorizontalHeaderLabels(
+            ['Логин', 'ФИО', 'Суммарный балл'])
+        self.ui.resultsTable.horizontalHeader().setSectionResizeMode(
+            QtWidgets.QHeaderView.Stretch)
+        self.ui.resultsTable.setEditTriggers(
+            QtWidgets.QAbstractItemView.NoEditTriggers)
+        self.ui.resultsTable.setSelectionBehavior(
+            QtWidgets.QAbstractItemView.SelectRows)
         self.ui.openCsvButton.clicked.connect(self.open_csv)
         self.ui.schoolCombo.currentIndexChanged.connect(self.show_people)
         self.ui.classCombo.currentIndexChanged.connect(self.show_people)
         self.ui.schoolCombo.addItem('Все школы', '')
         self.ui.classCombo.addItem('Все классы', '')
+        sample = Path(__file__).resolve().with_name('olympiad.csv')
+        if sample.exists():
+            self.load_csv(sample)
 
     def open_csv(self):
-        path, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Выберите результаты олимпиады', str(Path.home()), 'CSV (*.csv);;Все файлы (*)')
+        path, _ = QtWidgets.QFileDialog.getOpenFileName(
+            self, 'Выберите результаты олимпиады', str(Path.home()), 'CSV (*.csv);;Все файлы (*)')
         if not path:
             return
-        data = Path(path).read_bytes()
+        self.load_csv(Path(path))
+
+    def load_csv(self, path):
+        data = path.read_bytes()
         try:
             text = data.decode('utf-8-sig')
         except UnicodeDecodeError:
@@ -37,7 +48,8 @@ class MainWindow(QtWidgets.QMainWindow):
         for row in rows:
             login = row['login'].strip()
             parts = login.split('-')
-            people.append((login, row['user_name'].strip(), int(row['Score']), parts[-3], parts[-2]))
+            people.append((login, row['user_name'].strip(), int(
+                row['Score']), parts[-3], parts[-2]))
         self.people = people
         self.ui.schoolCombo.blockSignals(True)
         self.ui.classCombo.blockSignals(True)
@@ -51,15 +63,17 @@ class MainWindow(QtWidgets.QMainWindow):
             self.ui.classCombo.addItem(grade, grade)
         self.ui.schoolCombo.blockSignals(False)
         self.ui.classCombo.blockSignals(False)
-        self.ui.fileLabel.setText(Path(path).name)
+        self.ui.fileLabel.setText(path.name)
         self.show_people()
 
     def show_people(self):
         school = self.ui.schoolCombo.currentData()
         grade = self.ui.classCombo.currentData()
-        people = [p for p in self.people if (not school or p[3] == school) and (not grade or p[4] == grade)]
+        people = [p for p in self.people if (
+            not school or p[3] == school) and (not grade or p[4] == grade)]
         scores = sorted((p[2] for p in people), reverse=True)
-        colors = {1: QtGui.QColor('#ffe59b'), 2: QtGui.QColor('#dce3ec'), 3: QtGui.QColor('#e9b994')}
+        colors = {1: QtGui.QColor('#ffe59b'), 2: QtGui.QColor(
+            '#dce3ec'), 3: QtGui.QColor('#e9b994')}
         table = self.ui.resultsTable
         table.setRowCount(len(people))
         for i, (login, name, score, _, _) in enumerate(people):

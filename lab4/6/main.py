@@ -11,9 +11,9 @@ from ui_6 import Ui_MainWindow
 
 class Database:
     def __init__(self):
-        directory = Path(QtCore.QStandardPaths.writableLocation(QtCore.QStandardPaths.AppDataLocation))
-        directory.mkdir(parents=True, exist_ok=True)
-        self.connection = sqlite3.connect(str(directory / 'library.sqlite'))
+        path = Path(__file__).resolve().with_name('library.sqlite')
+        first_run = not path.exists()
+        self.connection = sqlite3.connect(str(path))
         self.connection.row_factory = sqlite3.Row
         self.connection.executescript('''
             CREATE TABLE IF NOT EXISTS users (
@@ -31,6 +31,17 @@ class Database:
                 image BLOB
             );
         ''')
+        if first_run:
+            self.connection.executemany('INSERT INTO books (title, author, year, genre, image) VALUES (?, ?, ?, ?, NULL)', [
+                ('Евгений Онегин', 'Александр Пушкин', 1833, 'Роман в стихах'),
+                ('Преступление и наказание', 'Фёдор Достоевский', 1866, 'Роман'),
+                ('Война и мир', 'Лев Толстой', 1869, 'Роман-эпопея'),
+                ('Мастер и Маргарита', 'Михаил Булгаков', 1966, 'Роман'),
+                ('Алые паруса', 'Александр Грин', 1923, 'Повесть'),
+            ])
+            salt = os.urandom(16)
+            hashed = hashlib.pbkdf2_hmac('sha256', b'demo123', salt, 250000)
+            self.connection.execute('INSERT INTO users (login, salt, password_hash) VALUES (?, ?, ?)', ('demo', salt.hex(), hashed.hex()))
         self.connection.commit()
 
     def register(self, login, password):
